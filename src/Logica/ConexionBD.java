@@ -24,11 +24,12 @@ public class ConexionBD {
             System.err.println(e);
         } catch (ClassNotFoundException ex) {
             System.err.println("Error 1: " + ex);
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
             //java.util.logging.Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conexion;
     }
+
     /*public Connection getConnection() {
         try {
             Class.forName(DRIVER);

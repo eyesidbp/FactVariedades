@@ -1,7 +1,6 @@
 package Visual;
 
 import Images.Iconos;
-import Logica.Compra;
 import Logica.ConexionBD;
 import Logica.Producto;
 import Logica.ProveedorCompras;
@@ -35,121 +34,13 @@ public class FormInventario extends javax.swing.JFrame {
     public String filtroCategoria;
     private ProveedorCompras SQLProveedor = new ProveedorCompras();
     private Producto SQLProducto = new Producto();
-    private Compra SQLCompra = new Compra();
 
     public FormInventario() {
         connection = connect.getConexion();
         SQLProveedor.setConnection(connection);
         initComponents();
         this.setLocationRelativeTo(null);
-        cargarDatosProveedor(sqlTablaProveedor);
-        cargarDatosCompra(sqlTablaCompra);
 
-    }
-
-    public void cargarDatosCompra(String consulta) {
-        int columnas;
-        DefaultTableModel modeloCompra = new DefaultTableModel();
-        tbVentas.setBackground(new Color(204, 255, 204));
-        tbVentas.setModel(modeloCompra);
-        //tbCcompra.getTableHeader().setBackground(Color.white);
-        try {
-            ps = connection.prepareStatement(consulta);
-            //System.out.println(ps);
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
-            modeloCompra.addColumn("Cod");
-            modeloCompra.addColumn("Producto");
-            modeloCompra.addColumn("Proveedor");
-            modeloCompra.addColumn("Cant");
-            modeloCompra.addColumn("Valor");
-            modeloCompra.addColumn("Fecha");
-            int anchoCol[] = {50, 200, 200, 70, 100, 150};
-            for (int i = 0; i < columnas; i++) {
-                tbVentas.getColumnModel().getColumn(i).setPreferredWidth(anchoCol[i]);
-            }
-            while (rs.next()) {
-                Object[] filas = new Object[columnas];
-                for (int i = 0; i < columnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modeloCompra.addRow(filas);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-        cargarListaProductos();
-        cargarListaProveedores();
-        //cargarListaCategorias();
-        //connect.stopConnection();
-    }
-
-    public void cargarDatosProveedor(String consulta) {
-        int columnas;
-        DefaultTableModel modeloCategoria = new DefaultTableModel();
-        tbInventario.setBackground(new Color(204, 255, 204));
-        tbInventario.setModel(modeloCategoria);
-        tbInventario.getTableHeader().setBackground(Color.white);
-        try {
-            ps = connection.prepareStatement(consulta);
-            //System.out.println(ps);
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
-            modeloCategoria.addColumn("Codigo");
-            modeloCategoria.addColumn("Nombre");
-            modeloCategoria.addColumn("Telefono");
-            int anchoCol[] = {100, 150, 150};
-            for (int i = 0; i < columnas; i++) {
-                tbInventario.getColumnModel().getColumn(i).setPreferredWidth(anchoCol[i]);
-            }
-            while (rs.next()) {
-                Object[] filas = new Object[columnas];
-                for (int i = 0; i < columnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modeloCategoria.addRow(filas);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-
-        //connect.stopConnection();
-    }
-
-    public void cargarListaProductos() {
-        int columnas;
-        cbProductoVentas.removeAllItems();
-        try {
-            ps = connection.prepareStatement("select * from producto");
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
-            cbProductoVentas.addItem("Seleccione");
-            while (rs.next()) {
-                cbProductoVentas.addItem(rs.getObject(2).toString());
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
-    }
-
-    public void cargarListaProveedores() {
-        int columnas;
-        cbClienteVentas.removeAllItems();
-        try {
-            ps = connection.prepareStatement("select * from proveedor");
-            rs = ps.executeQuery();
-            rsmd = rs.getMetaData();
-            columnas = rsmd.getColumnCount();
-            cbClienteVentas.addItem("Seleccione");
-            while (rs.next()) {
-                cbClienteVentas.addItem(rs.getObject(2).toString());
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex);
-        }
     }
 
     /*private void limpiarCategoria() {
@@ -586,7 +477,7 @@ public class FormInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_tpInventarioComponentShown
 
     private void tpInventarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tpInventarioFocusGained
-        cargarDatosProveedor(sqlTablaProveedor);
+
     }//GEN-LAST:event_tpInventarioFocusGained
 
     private void tabProductosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabProductosFocusGained
@@ -594,23 +485,22 @@ public class FormInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_tabProductosFocusGained
 
     private void btnEliminarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInventarioActionPerformed
-      
-       
+
+
     }//GEN-LAST:event_btnEliminarInventarioActionPerformed
 
     private void btnLimpiarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarInventarioActionPerformed
-        
+
     }//GEN-LAST:event_btnLimpiarInventarioActionPerformed
 
     private void btnModificarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarInventarioActionPerformed
-      
 
-    
+
     }//GEN-LAST:event_btnModificarInventarioActionPerformed
 
     private void btnGuardarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarInventarioActionPerformed
 
-       
+
     }//GEN-LAST:event_btnGuardarInventarioActionPerformed
 
     private void txtValorInventarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorInventarioKeyTyped
@@ -618,8 +508,8 @@ public class FormInventario extends javax.swing.JFrame {
         if (!isNum(evt.getKeyChar())) {
             //getToolkit().beep();
             JOptionPane.showMessageDialog(null, "<html><center>El dato ingresado no es valido,<br>"
-                + "solo se aceptan numeros</center><html>",
-                "Dato no Valido", JOptionPane.PLAIN_MESSAGE, icon.getCancelIcon());
+                    + "solo se aceptan numeros</center><html>",
+                    "Dato no Valido", JOptionPane.PLAIN_MESSAGE, icon.getCancelIcon());
             evt.consume();
         }
         if (txtValorInventario.getText().length() >= 10) {
@@ -637,8 +527,8 @@ public class FormInventario extends javax.swing.JFrame {
         if (!isNum(evt.getKeyChar())) {
             //getToolkit().beep();
             JOptionPane.showMessageDialog(null, "<html><center>El dato ingresado no es valido,<br>"
-                + "solo se aceptan numeros</center><html>",
-                "Dato no Valido", JOptionPane.PLAIN_MESSAGE, icon.getCancelIcon());
+                    + "solo se aceptan numeros</center><html>",
+                    "Dato no Valido", JOptionPane.PLAIN_MESSAGE, icon.getCancelIcon());
             evt.consume();
         }
         if (txtProductoInventario.getText().length() >= 10) {
@@ -696,13 +586,12 @@ public class FormInventario extends javax.swing.JFrame {
         } else {
             return false;
         }
-    }    public void buscarProveedor() {
-        cargarDatosProveedor(sqlTablaProveedor + " where "
-                + "(CodProveedor like '%" + txtBuscarInventario.getText() + "%' "
-                + "or NomProveedor like '%" + txtBuscarInventario.getText() + "%' "
-                + "or TelProveedor like '%" + txtBuscarInventario.getText().toString() + "%') "
-        );
     }
+
+    public void buscarProveedor() {
+
+    }
+
     public static void main(String args[]) {
 
         try {

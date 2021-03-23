@@ -1336,12 +1336,11 @@ public class FormProveedor extends javax.swing.JFrame {
         SQLProveedor.setValorCompra(Double.parseDouble(tbCompra.getValueAt(fila, 4).toString()));
         SQLProveedor.setFechaCompra(tbCompra.getValueAt(fila, 5).toString());
 
+        txtCantidadCompra.setText(String.valueOf(SQLProveedor.getCantidadCompra()));
+        txtValorCompra.setText(String.valueOf(SQLProveedor.getValorCompra()));
         txtFechaDia.setText(SQLProveedor.getFechaCompra().substring(8, 10));
         cbFechaMes.setSelectedItem(ObtenerMes(SQLProveedor.getFechaCompra().substring(5, 7)));
         txtFechaAño.setText(SQLProveedor.getFechaCompra().substring(0, 4));
-
-        SQLProducto.setCodCategoria1(tbCompra.getValueAt(fila, 0).toString());
-        SQLProducto.setDesCategoria1(tbCompra.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tbCompraMouseClicked
 
     private void txtBuscarCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCompraKeyReleased

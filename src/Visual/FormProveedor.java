@@ -50,8 +50,8 @@ public class FormProveedor extends javax.swing.JFrame {
     public void cargarDatosCompra(String consulta) {
         int columnas;
         DefaultTableModel modeloCompra = new DefaultTableModel();
-        tbCcompra.setBackground(new Color(204, 255, 204));
-        tbCcompra.setModel(modeloCompra);
+        tbCompra.setBackground(new Color(204, 255, 204));
+        tbCompra.setModel(modeloCompra);
         //tbCcompra.getTableHeader().setBackground(Color.white);
         try {
             ps = connection.prepareStatement(consulta);
@@ -67,7 +67,7 @@ public class FormProveedor extends javax.swing.JFrame {
             modeloCompra.addColumn("Fecha");
             int anchoCol[] = {50, 200, 200, 70, 100, 150};
             for (int i = 0; i < columnas; i++) {
-                tbCcompra.getColumnModel().getColumn(i).setPreferredWidth(anchoCol[i]);
+                tbCompra.getColumnModel().getColumn(i).setPreferredWidth(anchoCol[i]);
             }
             while (rs.next()) {
                 Object[] filas = new Object[columnas];
@@ -207,7 +207,7 @@ public class FormProveedor extends javax.swing.JFrame {
         lblBuscarCompra = new javax.swing.JLabel();
         txtBuscarCompra = new javax.swing.JTextField();
         spTablaCategoria = new javax.swing.JScrollPane();
-        tbCcompra = new javax.swing.JTable();
+        tbCompra = new javax.swing.JTable();
         pnDatosCompras = new javax.swing.JPanel();
         lblProductoCompra = new javax.swing.JLabel();
         lblProveedorCompra = new javax.swing.JLabel();
@@ -310,9 +310,9 @@ public class FormProveedor extends javax.swing.JFrame {
             }
         });
 
-        tbCcompra.setBackground(new java.awt.Color(153, 255, 204));
-        tbCcompra.setFont(new java.awt.Font("Century", 0, 12)); // NOI18N
-        tbCcompra.setModel(new javax.swing.table.DefaultTableModel(
+        tbCompra.setBackground(new java.awt.Color(153, 255, 204));
+        tbCompra.setFont(new java.awt.Font("Century", 0, 12)); // NOI18N
+        tbCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -342,13 +342,13 @@ public class FormProveedor extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbCcompra.setGridColor(new java.awt.Color(0, 0, 0));
-        tbCcompra.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbCompra.setGridColor(new java.awt.Color(0, 0, 0));
+        tbCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbCcompraMouseClicked(evt);
+                tbCompraMouseClicked(evt);
             }
         });
-        spTablaCategoria.setViewportView(tbCcompra);
+        spTablaCategoria.setViewportView(tbCompra);
 
         javax.swing.GroupLayout pnListadoComprasLayout = new javax.swing.GroupLayout(pnListadoCompras);
         pnListadoCompras.setLayout(pnListadoComprasLayout);
@@ -1298,18 +1298,20 @@ public class FormProveedor extends javax.swing.JFrame {
         cargarDatosCompra(sqlTablaCompra);
     }//GEN-LAST:event_btnGuardarCompraActionPerformed
 
-    private void tbCcompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCcompraMouseClicked
-        /*        int fila = tbCategoria.getSelectedRow();
+    private void tbCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCompraMouseClicked
+        int fila = tbCompra.getSelectedRow();
 
-        SQLProducto.setCodCategoria(tbCategoria.getValueAt(fila, 0).toString());
-        SQLProducto.setDesCategoria(tbCategoria.getValueAt(fila, 1).toString());
+        SQLProveedor.setCodCompra(tbCompra.getValueAt(fila, 0).toString());
+        SQLProveedor.setCodProductoCompra(tbCompra.getValueAt(fila, 1).toString());
+        SQLProveedor.setCodProveedorCompra(tbCompra.getValueAt(fila, 2).toString());
+        SQLProveedor.setCantidadCompra(Integer.parseInt(tbCompra.getValueAt(fila, 1).toString()));
 
         txtCodigoCategoria.setText(SQLProducto.getCodCategoria());
         txtDescripcionCategoria.setText(SQLProducto.getDesCategoria());
 
-        SQLProducto.setCodCategoria1(tbCategoria.getValueAt(fila, 0).toString());
-        SQLProducto.setDesCategoria1(tbCategoria.getValueAt(fila, 1).toString());*/
-    }//GEN-LAST:event_tbCcompraMouseClicked
+        SQLProducto.setCodCategoria1(tbCompra.getValueAt(fila, 0).toString());
+        SQLProducto.setDesCategoria1(tbCompra.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_tbCompraMouseClicked
 
     private void txtBuscarCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCompraKeyReleased
         cargarDatosCompra(sqlTablaCompra + " and (producto.Descripcion like '%"
@@ -1428,7 +1430,7 @@ public class FormProveedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane spTablaProveedor;
     private javax.swing.JPanel tabCompras;
     private javax.swing.JPanel tabProveedores;
-    private javax.swing.JTable tbCcompra;
+    private javax.swing.JTable tbCompra;
     private javax.swing.JTable tbProveedor;
     private javax.swing.JTabbedPane tpProveedores;
     private javax.swing.JTextField txtBuscarCompra;

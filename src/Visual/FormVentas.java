@@ -1,7 +1,6 @@
 package Visual;
 
 import Images.Iconos;
-import Logica.Compra;
 import Logica.ConexionBD;
 import Logica.Producto;
 import Logica.ProveedorCompras;
@@ -35,7 +34,6 @@ public class FormVentas extends javax.swing.JFrame {
     public String filtroCategoria;
     private ProveedorCompras SQLProveedor = new ProveedorCompras();
     private Producto SQLProducto = new Producto();
-    private Compra SQLCompra = new Compra();
 
     public FormVentas() {
         connection = connect.getConexion();

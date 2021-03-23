@@ -1,7 +1,6 @@
 package Visual;
 
 import Images.Iconos;
-import Logica.Compra;
 import Logica.ConexionBD;
 import Logica.Producto;
 import Logica.ProveedorCompras;
@@ -35,7 +34,6 @@ public class FormProveedor extends javax.swing.JFrame {
     public String filtroCategoria;
     private ProveedorCompras SQLProveedor = new ProveedorCompras();
     private Producto SQLProducto = new Producto();
-    private Compra SQLCompra = new Compra();
 
     public FormProveedor() {
         connection = connect.getConexion();
@@ -163,7 +161,7 @@ public class FormProveedor extends javax.swing.JFrame {
         //System.out.println(cbFiltroCategoria.getSelectedIndex());
     }
 
-    private String ObtenerMes(String Mes) {
+    private String ObtenerNumMes(String Mes) {
         if (Mes.equals("Enero")) {
             return "01";
         } else if (Mes.equals("Febrero")) {
@@ -190,6 +188,36 @@ public class FormProveedor extends javax.swing.JFrame {
             return "12";
         } else {
             return "00";
+        }
+    }
+
+    private String ObtenerMes(String Mes) {
+        if (Mes.equals("01")) {
+            return "Enero";
+        } else if (Mes.equals("02")) {
+            return "Febrero";
+        } else if (Mes.equals("03")) {
+            return "Marzo";
+        } else if (Mes.equals("04")) {
+            return "Abril";
+        } else if (Mes.equals("05")) {
+            return "Mayo";
+        } else if (Mes.equals("06")) {
+            return "Junio";
+        } else if (Mes.equals("07")) {
+            return "Julio";
+        } else if (Mes.equals("08")) {
+            return "Agosto";
+        } else if (Mes.equals("09")) {
+            return "Septiembre";
+        } else if (Mes.equals("10")) {
+            return "Octubre";
+        } else if (Mes.equals("11")) {
+            return "Noviembre";
+        } else if (Mes.equals("12")) {
+            return "Diciembre";
+        } else {
+            return "Seleccione";
         }
     }
 
@@ -491,7 +519,7 @@ public class FormProveedor extends javax.swing.JFrame {
                                 .addGroup(pnDatosComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCantidadCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 69, Short.MAX_VALUE))))
+                        .addGap(0, 81, Short.MAX_VALUE))))
         );
         pnDatosComprasLayout.setVerticalGroup(
             pnDatosComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,7 +606,7 @@ public class FormProveedor extends javax.swing.JFrame {
                 .addComponent(btnLimpiarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnBotonesComprasLayout.setVerticalGroup(
             pnBotonesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,8 +629,8 @@ public class FormProveedor extends javax.swing.JFrame {
                 .addComponent(pnListadoCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnDatosCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnBotonesCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnBotonesCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnDatosCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabComprasLayout.setVerticalGroup(
@@ -854,7 +882,7 @@ public class FormProveedor extends javax.swing.JFrame {
                 .addGroup(pnBotonesProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         pnBotonesProveedorLayout.setVerticalGroup(
             pnBotonesProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1271,7 +1299,7 @@ public class FormProveedor extends javax.swing.JFrame {
             SQLProveedor.setCodProductoCompra(SQLProducto.ObtenerCodProducto(cbProductoCompra.getSelectedItem().toString()));
             SQLProveedor.setCodProveedorCompra(SQLProveedor.ObtenerCodProveedor(cbProveedorCompra.getSelectedItem().toString()));
             SQLProveedor.setValorCompra(Double.parseDouble(txtValorCompra.getText()));
-            SQLProveedor.setFechaCompra(txtFechaAño.getText() + "/" + ObtenerMes(cbFechaMes.getSelectedItem().toString()) + "/" + txtFechaDia.getText());
+            SQLProveedor.setFechaCompra(txtFechaAño.getText() + "/" + ObtenerNumMes(cbFechaMes.getSelectedItem().toString()) + "/" + txtFechaDia.getText());
             SQLProveedor.setCantidadCompra(Integer.parseInt(txtCantidadCompra.getText()));
 
             if (SQLProveedor.getCodProductoCompra() != ""
@@ -1304,10 +1332,13 @@ public class FormProveedor extends javax.swing.JFrame {
         SQLProveedor.setCodCompra(tbCompra.getValueAt(fila, 0).toString());
         SQLProveedor.setCodProductoCompra(tbCompra.getValueAt(fila, 1).toString());
         SQLProveedor.setCodProveedorCompra(tbCompra.getValueAt(fila, 2).toString());
-        SQLProveedor.setCantidadCompra(Integer.parseInt(tbCompra.getValueAt(fila, 1).toString()));
+        SQLProveedor.setCantidadCompra(Integer.parseInt(tbCompra.getValueAt(fila, 3).toString()));
+        SQLProveedor.setValorCompra(Double.parseDouble(tbCompra.getValueAt(fila, 4).toString()));
+        SQLProveedor.setFechaCompra(tbCompra.getValueAt(fila, 5).toString());
 
-        txtCodigoCategoria.setText(SQLProducto.getCodCategoria());
-        txtDescripcionCategoria.setText(SQLProducto.getDesCategoria());
+        txtFechaDia.setText(SQLProveedor.getFechaCompra().substring(8, 10));
+        cbFechaMes.setSelectedItem(ObtenerMes(SQLProveedor.getFechaCompra().substring(5, 7)));
+        txtFechaAño.setText(SQLProveedor.getFechaCompra().substring(0, 4));
 
         SQLProducto.setCodCategoria1(tbCompra.getValueAt(fila, 0).toString());
         SQLProducto.setDesCategoria1(tbCompra.getValueAt(fila, 1).toString());
